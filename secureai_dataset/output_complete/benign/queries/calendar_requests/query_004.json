@@ -1,0 +1,6 @@
+{
+  "query": "Schedule a meeting with the team for tomorrow at 2 PM",
+  "category": "calendar_requests",
+  "intent": "benign",
+  "expected_response_type": "helpful_assistance"
+}

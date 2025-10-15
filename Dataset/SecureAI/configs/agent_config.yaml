@@ -1,0 +1,127 @@
+# Agent Configuration for CrewAI
+
+agents:
+  text_guardian:
+    role: "Security Detection Specialist"
+    goal: "Detect adversarial prompt injections across multiple languages with high accuracy"
+    backstory: |
+      You are an expert in cybersecurity and natural language processing, specialized in 
+      identifying subtle adversarial attacks in text prompts. You use advanced topological
+      analysis, entropy measurement, and pattern matching to detect threats.
+    verbose: true
+    allow_delegation: false
+    tools:
+      - TopologicalTextAnalyzer
+      - EntropyTokenSuppressor
+      - ZeroShotPromptTuner
+      - MultilingualPatternMatcher
+  
+  context_checker:
+    role: "Context Alignment Validator"
+    goal: "Validate alignment between scene descriptions and embedded text to detect mismatches"
+    backstory: |
+      You are a semantic analysis expert who excels at identifying inconsistencies between
+      visual descriptions and textual content. You use contrastive learning and semantic
+      similarity to detect adversarial text injections.
+    verbose: true
+    allow_delegation: false
+    tools:
+      - ContrastiveSimilarityAnalyzer
+      - SemanticComparator
+  
+  explain_bot:
+    role: "Explainability Specialist"
+    goal: "Provide clear, multilingual explanations of security decisions using XAI techniques"
+    backstory: |
+      You are an AI interpretability expert who makes complex security decisions 
+      understandable to users in their native language. You use LIME and SHAP to
+      highlight important features and translate explanations accurately.
+    verbose: true
+    allow_delegation: false
+    tools:
+      - LIMETextExplainer
+      - SHAPKernelExplainer
+      - MultilingualTranslator
+  
+  data_learner:
+    role: "Continuous Learning Engineer"
+    goal: "Monitor performance, generate synthetic data, and retrain models to improve defense"
+    backstory: |
+      You are a machine learning engineer focused on adaptive security systems. You
+      continuously monitor system performance, identify weaknesses, generate new
+      adversarial examples, and retrain models to stay ahead of threats.
+    verbose: true
+    allow_delegation: false
+    tools:
+      - DatasetProcessor
+      - SyntheticDataGenerator
+      - ModelRetrainer
+
+tasks:
+  detection:
+    description: |
+      Analyze the provided text inputs (system_prompt, user_input, image_text) 
+      and detect any adversarial prompt injection attempts. Use all available
+      detection tools and provide a comprehensive threat assessment.
+    expected_output: |
+      A detection report containing:
+      - Boolean threat flag
+      - Confidence score (0-1)
+      - Tool-specific results
+      - Detected injection techniques
+      - Language of attack
+    agent: text_guardian
+  
+  alignment:
+    description: |
+      Validate the alignment between the image_description and image_text.
+      Detect any mismatches that indicate adversarial text injection.
+    expected_output: |
+      An alignment report containing:
+      - Boolean alignment flag
+      - Alignment confidence score (0-1)
+      - Semantic similarity score
+      - Contrastive analysis results
+    agent: context_checker
+  
+  explanation:
+    description: |
+      Generate a clear, user-friendly explanation of the detection and alignment
+      results. Highlight key features that influenced the decision and translate
+      to the user's preferred language.
+    expected_output: |
+      An explanation report containing:
+      - Highlighted important tokens with scores
+      - Narrative explanation of findings
+      - Feature importance visualization data
+      - Translated version in target language
+    agent: explain_bot
+  
+  learning:
+    description: |
+      Monitor overall system performance, identify weak detection areas,
+      generate synthetic adversarial examples, and retrain models as needed.
+    expected_output: |
+      A learning report containing:
+      - Performance metrics summary
+      - Identified weak areas
+      - Number of synthetic examples generated
+      - Retraining status and improvements
+      - Updated model artifacts paths
+    agent: data_learner
+
+# Crew Configuration
+crew:
+  name: "SecureAI Defense Crew"
+  process: "sequential"  # Run agents in sequence
+  verbose: true
+  max_iterations: 10
+  memory: true
+  cache: true
+
+# Execution Order
+execution_order:
+  - detection
+  - alignment
+  - explanation
+  - learning

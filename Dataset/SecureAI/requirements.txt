@@ -1,0 +1,106 @@
+# SecureAI Text-Only Multi-Agent Defense Builder
+# Requirements - Optimized for Mac M4 Air (16GB RAM, CPU-only)
+
+# Core Framework
+crewai==0.28.0
+langchain==0.1.0
+langchain-community==0.0.13
+
+# LLM Backend - Ollama (Local Llama 3.2)
+ollama>=0.1.0
+requests>=2.31.0
+pyyaml>=6.0
+
+# ML & NLP - Lightweight versions
+transformers==4.36.0
+sentence-transformers==2.2.2
+torch==2.1.0  # CPU version
+tokenizers==0.15.0
+
+# Multilingual Support
+sentencepiece==0.1.99
+protobuf==4.25.1
+
+# Detection Tools
+scikit-learn==1.3.2
+numpy==1.24.3
+pandas==2.1.4
+scipy==1.11.4
+
+# Topological Analysis
+gudhi==3.8.0
+
+# Explainability (XAI) - Stage 3
+lime==0.2.0.1
+shap==0.44.0
+
+# LLM Integration (Gemini) - Stage 3
+google-generativeai==0.3.2
+google-cloud-translate==3.13.0
+google-api-core==2.15.0
+
+# Pattern Matching & Text Processing
+regex==2023.12.25
+ftfy==6.1.3
+unidecode==1.3.7
+
+# Model Optimization
+onnx==1.15.0
+onnxruntime==1.16.3
+optimum==1.16.0
+
+# Caching & Performance
+joblib==1.3.2
+diskcache==5.6.3
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.18.0
+wordcloud==1.9.3
+
+# Jupyter & Interactive
+jupyter==1.0.0
+notebook==7.0.6
+ipywidgets==8.1.1
+tqdm==4.66.1
+
+# API & Deployment
+fastapi==0.109.0
+uvicorn==0.27.0
+streamlit==1.30.0
+pydantic==2.5.3
+
+# Configuration
+pyyaml==6.0.1
+python-dotenv==1.0.0
+
+# Utilities
+requests==2.31.0
+colorama==0.4.6
+rich==13.7.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Data Validation
+jsonschema==4.20.0
+
+# Metrics & Monitoring
+mlflow==2.9.2
+wandb==0.16.2
+
+# Security
+cryptography==41.0.7
+
+# Multilingual Text Processing
+polyglot==16.7.4
+pycld2==0.41
+
+# Additional NLP
+nltk==3.8.1
+spacy==3.7.2
+
+# Memory Optimization
+psutil==5.9.7

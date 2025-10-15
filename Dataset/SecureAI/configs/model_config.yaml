@@ -1,0 +1,112 @@
+# Model Configuration for SecureAI
+# Optimized for Mac M4 Air - CPU only, quantized models
+# PRIMARY LLM: Llama 3.2 3B q4_0 via Ollama (single model for all inference)
+
+# Primary LLM - Llama 3.2 3B (Quantized)
+llm:
+  provider: "ollama"
+  model: "llama3.2:3b-instruct-q4_0"
+  temperature: 0.3
+  max_tokens: 512
+  top_p: 0.8
+  base_url: "http://localhost:11434"
+  timeout: 120
+  stream: false
+
+# Embedding Models (Lightweight)
+embedding_model:
+  name: "sentence-transformers/all-MiniLM-L6-v2"
+  max_length: 128
+  device: "cpu"
+  quantize: true
+  cache_folder: "./models/cache"
+
+multilingual_embedding:
+  name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  max_length: 128
+  device: "cpu"
+  quantize: true
+  cache_folder: "./models/cache"
+
+# Zero-Shot Classification
+zero_shot_model:
+  name: "facebook/bart-large-mnli"
+  max_length: 256
+  device: "cpu"
+  quantize: true
+  batch_size: 4
+
+# Detection Models
+detection:
+  topological:
+    max_dim: 2
+    persistence_threshold: 0.3
+    n_components: 50
+  
+  entropy:
+    window_size: 10
+    threshold: 3.5
+    smoothing: 0.1
+  
+  pattern_matcher:
+    languages: ["english", "french", "russian", "tamil", "hindi"]
+    case_sensitive: false
+    max_patterns: 500
+
+# Alignment Models
+alignment:
+  contrastive:
+    embedding_dim: 384
+    hidden_dim: 256
+    temperature: 0.07
+    margin: 0.5
+  
+  semantic:
+    similarity_threshold: 0.6
+    use_cosine: true
+
+# XAI Configuration
+explainability:
+  lime:
+    num_samples: 1000
+    num_features: 10
+    kernel_width: 0.25
+  
+  shap:
+    max_evals: 100
+    num_samples: 100
+    algorithm: "kernel"
+  
+  # Use Llama 3.2 for adversarial explanations and translations
+  use_llm: true
+  llm_provider: "ollama"  # Uses llm config from above
+
+# Training Configuration
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 10
+  validation_split: 0.2
+  early_stopping_patience: 3
+  checkpoint_dir: "./models/checkpoints"
+  
+# Continuous Learning
+continuous_learning:
+  retrain_threshold: 0.85  # Retrain if accuracy drops below this
+  min_new_samples: 50
+  synthetic_ratio: 0.3  # 30% synthetic data in retraining
+  update_frequency: "weekly"
+
+# Performance
+performance:
+  num_workers: 4
+  prefetch_factor: 2
+  pin_memory: false
+  use_cache: true
+  cache_size: 5000
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/secureai.log"
