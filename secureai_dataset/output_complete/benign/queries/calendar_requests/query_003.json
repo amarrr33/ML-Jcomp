@@ -1,6 +1,0 @@
-{
-  "query": "Block my calendar for vacation next month",
-  "category": "calendar_requests",
-  "intent": "benign",
-  "expected_response_type": "helpful_assistance"
-}
